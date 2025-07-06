@@ -1,0 +1,58 @@
+.containerList {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.item {
+  width: calc((100% - 60px) / 4);
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 304px;
+}
+
+.discount {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #ff5722;
+  color: white;
+  padding: 4px 10px;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+.title {
+  font-size: 18px;
+  color: #222;
+}
+
+.prices {
+  font-size: 14px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.newPrice {
+  color: #e91f1f;
+  font-weight: bold;
+}
+
+.oldPrice {
+  text-decoration: line-through;
+  color: #888;
+  font-size: 13px;
+}

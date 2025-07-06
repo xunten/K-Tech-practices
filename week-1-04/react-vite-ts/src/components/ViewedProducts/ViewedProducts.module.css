@@ -1,0 +1,93 @@
+.wrapper {
+  background: #fff;
+  padding: 12px;
+  border-radius: 6px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.header h2 {
+  font-weight: bold;
+  color: #222;
+}
+
+.header button {
+  background: none;
+  border: none;
+  color: #0b74e5;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.productList {
+  display: flex;
+  overflow-x: auto;
+  gap: 12px;
+  padding-bottom: 8px;
+}
+
+.card {
+  position: relative;
+  min-width: 180px;
+  width: 279px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 8px;
+  background: #fafafa;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.thumb {
+  width: 66px;
+  height: auto;
+  border-radius: 4px;
+}
+
+.info {
+  margin-top: 6px;
+}
+
+.name {
+  min-height: 40px;
+  margin-right: 12px;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(16, 24, 40, 1);
+  margin-bottom: 4px;
+  line-height: 20px;
+  text-overflow: ellipsis;
+}
+
+.price {
+  margin-top: 5px;
+  font-weight: 700;
+  color: #e91f1f;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+}
+
+.discontinued {
+  font-weight: bold;
+  color: red;
+}
+
+.remove {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: #eee;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 2px;
+  line-height: 1;
+}

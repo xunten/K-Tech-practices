@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:opsz,wght@8..144,400;700&display=swap');
+body{
+    margin: 0;
+}
+
+p,ul,ol {
+  padding: 0;
+  margin: 0;
+  line-height: 22px;
+}
+
+#root {
+    background: #cfcfcf;
+    margin: 0;
+    padding: 50px 0;
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.App {
+    background: #fff;
+    border-radius: 10px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 30px;
+}
+.component {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.container {
+  display: flex;
+}
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

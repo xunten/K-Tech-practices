@@ -1,0 +1,26 @@
+.cartIcon{
+  top: 90px;
+  right: 200px;
+  background-color: #fff;
+  padding: 10px;
+}
+.icon {
+  position: relative;
+  cursor: pointer;
+  font-size: 22px;
+}
+.quantityContainer{
+  margin-top: -5px;
+}
+.title{
+  font-size: 15px;
+  color: #007a00;
+  margin: 0;
+  line-height: 1px;
+  margin-top: 10px;
+}
+
+.quantity {
+  font-weight: bold;
+  font-size: 15px;
+}

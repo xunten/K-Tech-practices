@@ -1,0 +1,55 @@
+.dropdown {
+  position: absolute;
+  right: 150px;
+  background: white;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.11);
+  border-radius: 8px;
+  max-width: 360px;
+  z-index: 10;
+  padding: 16px;
+}
+.closeBtn {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.item_quatitlyprice{
+  font-weight: bold;
+
+}
+.total {
+  margin-top: 16px;
+  font-weight: bold;
+  text-align: right;
+  color: rgb(206, 21, 21);
+}
+.viewCartBtn {
+  width: 100%;
+  margin-top: 12px;
+  background: #F97315;
+  color: white;
+  border: none;
+  padding: 8px 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.empty {
+  text-align: center;
+  color: #888;
+}
