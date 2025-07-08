@@ -13,7 +13,6 @@ interface HourlyForecastProps {
 const HourlyForecast: React.FC<HourlyForecastProps> = ({ hourly }) => {
   const nowHour = new Date().getHours();
 
-  // Xử lý để luôn hiển thị đủ 12 giờ
   const sliced = hourly.slice(nowHour);
   const displayHours =
     sliced.length >= 12

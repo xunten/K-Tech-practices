@@ -61,7 +61,7 @@ export default function WeatherApp() {
 
     return (
         <div className="flex items-center justify-center min-h-screen">
-            <div className="w-full max-w-md bg-white rounded-[32px] shadow-xl px-6 py-8 bg-gradient-to-b from-[#8cbde3] to-[#CEDCE7]">
+            <div className="w-full max-w-md bg-white rounded-[32px] shadow-xl px-6 py-8 bg-gradient-to-b from-[#a7d7fc] to-[#dceaf4]">
                 <TopBar input={input} setInput={setInput} onSearch={handleSearch} />
                 <CurrentWeather weather={weather} />
                 <HourlyForecast hourly={hourly} />
