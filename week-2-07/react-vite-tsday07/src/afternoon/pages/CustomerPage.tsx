@@ -1,8 +1,6 @@
-import React from 'react'
 
-type Props = {}
 
-export default function CustomerPage({}: Props) {
+export default function CustomerPage() {
   return (
     <div>CustomerPage</div>
   )
