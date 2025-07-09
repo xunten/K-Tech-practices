@@ -1,9 +1,10 @@
-import React from 'react'
 
 type Props = {}
 
 export default function BlogPage({}: Props) {
   return (
-    <div>BlogPage</div>
+    <div>
+      <h1>Blog Page</h1>
+    </div>
   )
 }
