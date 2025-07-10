@@ -1,6 +1,6 @@
 {
     "build": {
-        "evn": {
+        "env": {
             "VITE_ESLINT_DISABLE": "TRUE"
         }
     },
