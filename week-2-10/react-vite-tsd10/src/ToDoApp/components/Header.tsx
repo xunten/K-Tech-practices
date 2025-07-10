@@ -39,7 +39,7 @@ export default function Header() {
                     )}
 
                     <nav className="flex items-center space-x-1 sm:space-x-4">
-                        <NavLink
+                        {user && <NavLink
                             to="/tasks"
                             className={({ isActive }) =>
                                 `px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${isActive ? "bg-white/20 text-white shadow-sm" : "text-blue-100 hover:text-white hover:bg-white/10"
@@ -47,9 +47,9 @@ export default function Header() {
                             }
                         >
                             Tasks
-                        </NavLink>
+                        </NavLink>}
 
-                        <NavLink
+                        {user && <NavLink
                             to="/my-task"
                             className={({ isActive }) =>
                                 `px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${isActive ? "bg-white/20 text-white shadow-sm" : "text-blue-100 hover:text-white hover:bg-white/10"
@@ -57,9 +57,9 @@ export default function Header() {
                             }
                         >
                             My Tasks
-                        </NavLink>
+                        </NavLink>}
 
-                        <NavLink
+                        {user && <NavLink
                             to="/create-task"
                             className={({ isActive }) =>
                                 `px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${isActive ? "bg-white/20 text-white shadow-sm" : "text-blue-100 hover:text-white hover:bg-white/10"
@@ -67,7 +67,7 @@ export default function Header() {
                             }
                         >
                             Create Task
-                        </NavLink>
+                        </NavLink>}
 
                         {user && (
                             <button

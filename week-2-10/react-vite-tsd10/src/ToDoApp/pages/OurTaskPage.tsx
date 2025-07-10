@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { getTasks } from "../services"
-import type { Task } from "../types/type"
+import type { Task, User } from "../types/type"
 import TaskFilterForm from "../components/TaskFilterForm"
 import { Calendar, Edit3, Eye, Filter, Users } from "lucide-react"
+import LoginPage from "./LoginPage"
 
 type FilterType = {
   status: string
@@ -60,24 +61,39 @@ const PriorityBadge = ({ priority }: { priority: string }) => {
 }
 
 export default function OurTaskPage() {
+  const [user, setUser] = useState<User | null>(null)
   const navigate = useNavigate()
   const [tasks, setTasks] = React.useState([])
   const [filters, setFilters] = useState<FilterType>({
     status: "",
     priority: "",
   })
+  
+  useEffect(() => {
+      // Load user from localStorage if available
+      const storedUser = localStorage.getItem("user")
+      if (storedUser) {
+          setUser(JSON.parse(storedUser))
+      }
+  }, [])
 
   useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const tasks = await getTasks()
-        setTasks(tasks)
-      } catch (error) {
-        console.error("Error fetching tasks:", error)
+    if (user) {
+      const fetchTasks = async () => {
+        try {
+          const tasks = await getTasks()
+          setTasks(tasks)
+        } catch (error) {
+          console.error("Error fetching tasks:", error)
+        }
       }
+      fetchTasks()
     }
-    fetchTasks()
-  }, [])
+  }, [user])
+
+  if (!user) {
+    return <LoginPage />;
+  }
 
   const handleOnEdit = (taskId: number) => {
     navigate(`/update-task/${taskId}`)

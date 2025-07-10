@@ -3,7 +3,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import { createTask } from "../services";
-import type { Task } from "../types/type";
+import type { Task, User } from "../types/type";
+import { useEffect, useState } from "react";
+import LoginPage from "./LoginPage";
 
 interface TaskFormData {
   title: string;
@@ -48,6 +50,7 @@ const validationSchema: yup.ObjectSchema<TaskFormData> = yup.object({
 
 export default function CreateTaskPage() {
 
+  const [user, setUser] = useState<User | null>(null)
   const navigate = useNavigate();
   const {
     register,
@@ -67,6 +70,18 @@ export default function CreateTaskPage() {
        assignee_id: undefined,
     },
   });
+
+  useEffect(() => {
+      // Load user from localStorage if available
+      const storedUser = localStorage.getItem("user")
+      if (storedUser) {
+          setUser(JSON.parse(storedUser))
+      }
+  }, [])
+
+  if (!user) {
+    return <LoginPage />;
+  }
 
   const onSubmit = async (data: TaskFormData): Promise<void> => {
     try {

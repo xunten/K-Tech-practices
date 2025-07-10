@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate, useParams } from "react-router-dom";
 import { getTaskById, updateTask } from "../services";
-import type { Task } from "../types/type";
-import React, { useEffect } from "react";
+import type { Task, User } from "../types/type";
+import React, { useEffect, useState } from "react";
+import LoginPage from "./LoginPage";
 
 interface TaskFormData {
   title: string;
@@ -49,9 +50,10 @@ const validationSchema: yup.ObjectSchema<TaskFormData> = yup.object({
 
 export default function UpdateTaskPage() {
 
+  const [user, setUser] = useState<User | null>(null)
   const navigate = useNavigate();
   const { id } = useParams();
-   const [task, setTask] = React.useState<Task | null>(null);
+  const [task, setTask] = React.useState<Task | null>(null);
 
   const {
     register,
@@ -64,32 +66,46 @@ export default function UpdateTaskPage() {
   });
 
   useEffect(() => {
-    const fetchTask = async () => {
-      if (id !== undefined) {
-        try {
-          const data = await getTaskById(Number(id));
-          if (!data) {
-            throw new Error('Task not found');
-          }
-          // Convert Task to TaskFormData for reset
-          reset({
-            title: data.title || '',
-            start_date: data.start_date ? new Date(data.start_date).toISOString().split('T')[0] : '',
-            due_date: data.due_date ? new Date(data.due_date).toISOString().split('T')[0] : '',
-            description: data.description || '',
-            status: data.status,
-            priority: data.priority,
-            assignee_id: data.assignee_id ?? '',
-          });
-          setTask(data);
-        } catch (error) {
-          console.error('Error fetching task:', error);
-        }
+      // Load user from localStorage if available
+      const storedUser = localStorage.getItem("user")
+      if (storedUser) {
+          setUser(JSON.parse(storedUser))
       }
-    };
+  }, [])
 
-    fetchTask();
-  }, [id, reset]);
+  useEffect(() => {
+    if (user) {
+      const fetchTask = async () => {
+        if (id !== undefined) {
+          try {
+            const data = await getTaskById(Number(id));
+            if (!data) {
+              throw new Error('Task not found');
+            }
+            // Convert Task to TaskFormData for reset
+            reset({
+              title: data.title || '',
+              start_date: data.start_date ? new Date(data.start_date).toISOString().split('T')[0] : '',
+              due_date: data.due_date ? new Date(data.due_date).toISOString().split('T')[0] : '',
+              description: data.description || '',
+              status: data.status,
+              priority: data.priority,
+              assignee_id: data.assignee_id ?? '',
+            });
+            setTask(data);
+          } catch (error) {
+            console.error('Error fetching task:', error);
+          }
+        }
+      };
+
+      fetchTask();
+    }
+  }, [id, reset, user]);
+
+  if (!user) {
+    return <LoginPage />;
+  }
 
   const onSubmit = async (data: TaskFormData): Promise<void> => {
     try {
