@@ -7,6 +7,8 @@ import AuthContext from "../contexts/context";
 import { login } from "../services";
 
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { toast } from "react-toastify";
+// import { useNavigate } from "react-router-dom";
 
 const schema = yup.object({
   username: yup
@@ -20,7 +22,6 @@ type LoginFormData = yup.InferType<typeof schema>;
 
 export default function LoginPage() {
   const { setUser } = useContext(AuthContext);
-  // const navigate = useNavigate();
 
   const {
     register,
@@ -28,40 +29,57 @@ export default function LoginPage() {
     formState: { errors, isValid },
   } = useForm<LoginFormData>({
     resolver: yupResolver(schema),
-    // defaultValues: {
-    //   username: 'tungnt@softech.vn',
-    //   password: '123456789',
-    // },
+    defaultValues: {
+      username: 'tungnt@softech.vn',
+      password: '123456789',
+    },
     mode: "onChange",
   });
 
   const [showPassword, setShowPassword] = useState(false);
 
+  // const navigate = useNavigate();
+
   const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
-    console.log("Form submitted:", data);
-    if (data.remember) {
-      console.log("Simulate saving to localStorage...");
+    try {
+
+      // const user = await login(data.username, data.password);
+      // setUser(user);
+      // localStorage.setItem("user", JSON.stringify(user));
+      // console.log(user);
+      // window.location.href = '/tasks';
+      // toast("Login succeed!");
+
+      console.log("Form submitted:", data);
+      if (data.remember) {
+        console.log("Simulate saving to localStorage...");
+      }
+      // Call API to authenticate user
+      const result = await login(data.username, data.password);
+      console.log('Login result:', result);
+
+      const authenticatedUser = {
+        id: result.loggedInUser.id,
+        email: result.loggedInUser.email,
+        access_token: result.access_token,
+      };
+      // alert("Signed in successfully!");
+
+      setUser(authenticatedUser);
+
+      // save user info to localStorage
+      localStorage.setItem('user', JSON.stringify(authenticatedUser));
+
+      // save access token to localStorage
+      localStorage.setItem('access_token', result.access_token);
+
+      window.location.href = '/tasks'; // Redirect to tasks page
+      // navigate("/tasks");      
+      toast.success('Signed in successfully!');
+    } catch (error) {
+      console.error('Error login:', error);
+      toast.error('Login failed. Please try again.');
     }
-    // Call API to authenticate user
-    const result = await login(data.username, data.password);
-    console.log('Login result:', result);
-
-    const authenticatedUser = {
-      id: result.loggedInUser.id,
-      email: result.loggedInUser.email,
-      access_token: result.access_token,
-    };
-    // alert("Signed in successfully!");
-
-    setUser(authenticatedUser);
-
-    // save user info to localStorage
-    localStorage.setItem('user', JSON.stringify(authenticatedUser));
-
-    // save access token to localStorage
-    localStorage.setItem('access_token', result.access_token);
-
-    window.location.href = '/tasks'; // Redirect to tasks page
   };
 
   return (

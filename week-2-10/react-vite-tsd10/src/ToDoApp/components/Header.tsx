@@ -19,7 +19,7 @@ export default function Header() {
         localStorage.removeItem("user")
         localStorage.removeItem("access_token")
         // Optionally, redirect to login page or show a message
-        window.location.href = "/login"
+        window.location.href = "/"
     }
 
     return (
@@ -70,7 +70,7 @@ export default function Header() {
                         </NavLink>
 
                         {!user && <NavLink
-                            to="/login"
+                            to="/"
                             className={({ isActive }) =>
                                 `px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${isActive ? "bg-white/20 text-white shadow-sm" : "text-blue-100 hover:text-white hover:bg-white/10"
                                 }`

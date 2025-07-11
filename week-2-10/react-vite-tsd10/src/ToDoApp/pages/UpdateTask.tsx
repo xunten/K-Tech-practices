@@ -6,6 +6,7 @@ import { getTaskById, updateTask } from "../services";
 import type { Task, User } from "../types/type";
 import React, { useEffect, useState } from "react";
 import LoginPage from "./LoginPage";
+import { toast } from "react-toastify";
 
 interface TaskFormData {
   title: string;
@@ -130,6 +131,7 @@ export default function UpdateTaskPage() {
       await updateTask(updatedTask);
 
       navigate('/tasks'); // Redirect to tasks list after update
+      toast.success('Task updated successfully!');
     } catch (error) {
       console.error('Error updating task:', error);
       alert('Failed to update task. Please try again.');
@@ -223,9 +225,9 @@ export default function UpdateTaskPage() {
                       : 'border-gray-300 focus:border-blue-500 focus:ring-blue-200'
                     }`}
                 >
-                  <option value="to_do">📋 To Do</option>
-                  <option value="in_progress">⚡ In Progress</option>
-                  <option value="done">✅ Done</option>
+                  <option value="to_do">To Do</option>
+                  <option value="in_progress">In Progress</option>
+                  <option value="done">Done</option>
                 </select>
                 {errors.status && <p className="text-red-500 text-sm mt-1">{errors.status.message}</p>}
               </div>
@@ -243,9 +245,9 @@ export default function UpdateTaskPage() {
                       : 'border-gray-300 focus:border-blue-500 focus:ring-blue-200'
                     }`}
                 >
-                  <option value="low">🟢 Low</option>
-                  <option value="medium">🟡 Medium</option>
-                  <option value="high">🔴 High</option>
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
                 </select>
                 {errors.priority && <p className="text-red-500 text-sm mt-1">{errors.priority.message}</p>}
               </div>

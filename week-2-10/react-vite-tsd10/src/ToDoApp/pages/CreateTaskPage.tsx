@@ -6,6 +6,7 @@ import { createTask } from "../services";
 import type { Task, User } from "../types/type";
 import { useEffect, useState } from "react";
 import LoginPage from "./LoginPage";
+import { toast } from "react-toastify";
 
 interface TaskFormData {
   title: string;
@@ -108,10 +109,10 @@ export default function CreateTaskPage() {
 
       // Reset form
       reset();
-      alert('Task created successfully!');
+      toast.success('Task created successfully!');
     } catch (error) {
       console.error('Error creating task:', error);
-      alert('Failed to create task. Please try again.');
+      toast.error('Failed to create task. Please try again.');
     }
   };
 
@@ -202,9 +203,9 @@ export default function CreateTaskPage() {
                       : 'border-gray-300 focus:border-blue-500 focus:ring-blue-200'
                     }`}
                 >
-                  <option value="to_do">📋 To Do</option>
-                  <option value="in_progress">⚡ In Progress</option>
-                  <option value="done">✅ Done</option>
+                  <option value="to_do">To Do</option>
+                  <option value="in_progress">In Progress</option>
+                  <option value="done">Done</option>
                 </select>
                 {errors.status && <p className="text-red-500 text-sm mt-1">{errors.status.message}</p>}
               </div>
@@ -222,9 +223,9 @@ export default function CreateTaskPage() {
                       : 'border-gray-300 focus:border-blue-500 focus:ring-blue-200'
                     }`}
                 >
-                  <option value="low">🟢 Low</option>
-                  <option value="medium">🟡 Medium</option>
-                  <option value="high">🔴 High</option>
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
                 </select>
                 {errors.priority && <p className="text-red-500 text-sm mt-1">{errors.priority.message}</p>}
               </div>
