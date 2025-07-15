@@ -8,6 +8,7 @@ const navLinks = [
   { href: "/admin/task-csr", label: "Task-CSR" },
   { href: "/admin/task-ssr", label: "Task-SSR" },
   { href: "/admin/task-ssg", label: "Task-SSG" },
+  { href: "/admin/task-isg", label: "Task-ISR" },
 ];
 
 export default function Header() {

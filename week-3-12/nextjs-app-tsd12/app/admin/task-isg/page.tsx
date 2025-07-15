@@ -5,6 +5,10 @@ import { Task } from '@/types/type';
 import { getTasks } from '@/services';
 import { Calendar, Eye, Users } from 'lucide-react';
 
+// ISG Configuration - Revalidate every 60 seconds
+export const revalidate = 60;
+
+// Optional: Configure dynamic behavior
 export const dynamic = 'force-static';
 
 export default async function Index() {
@@ -20,12 +24,16 @@ export default async function Index() {
 }
 
 function Tasks({ tasks }: { tasks: Task[] }) {
+  if (!Array.isArray(tasks)) {
+    return <p className="text-red-600">Tasks data is not an array!</p>;
+  }
+
   return (
     <div>
-      <h1 className='text-2xl font-bold text-gray-800 mb-4'>Task SSG</h1>
+      <h1 className='text-2xl font-bold text-gray-800 mb-4'>Tasks ISG</h1>
       <hr className='mb-4 border-gray-200 border-t' />
-      
-      
+
+
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">

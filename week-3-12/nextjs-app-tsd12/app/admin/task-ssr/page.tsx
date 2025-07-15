@@ -1,25 +1,32 @@
-import { Eye, Calendar, Users } from "lucide-react";
-import type { Task } from "@/types/type";
-import { getTasks } from "@/services";
-import Link from "next/link";
+import Link from 'next/link';
+import React from 'react';
 
-export const dynamic = "force-dynamic";
+import { Task } from '@/types/type';
+import { getTasks } from '@/services';
+import { Calendar, Eye, Users } from 'lucide-react';
 
-export default async function TaskSSR() {
-  const token = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
-  const res = await getTasks(token)
+// Server-side rendering to fetch products
+// This function will run on the server and fetch data before rendering the page
+export const dynamic = 'force-dynamic';
 
-  const tasks: Task[] = Array.isArray(res)
-    ? res
-    : Array.isArray(res?.data)
-      ? res.data
-      : [];
+export default async function Index() {
+
+  const data = await getTasks();
+  const tasks = Array.isArray(data.tasks) ? data.tasks : data;
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-      <div className="px-6 py-4 border-b border-gray-200">
-        <h2 className="text-lg font-semibold text-gray-900">Tasks Overview (SSR)</h2>
-      </div>
+    <div className='bg-white rounded-lg shadow p-6'>
+      <Tasks tasks={tasks} />
+    </div>
+  );
+}
+
+function Tasks({ tasks }: { tasks: Task[] }) {
+  return (
+    <div>
+      <h1 className='text-2xl font-bold text-gray-800 mb-4'>Tasks SSR</h1>
+      <hr className='mb-4 border-gray-200 border-t' />
+
 
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
@@ -100,6 +107,16 @@ export default async function TaskSSR() {
           <p className="text-gray-500">Try adjusting your filters or create a new task.</p>
         </div>
       )}
+
+      {/* <ul>
+        {tasks.map((task) => (
+          <li key={task.id} className='border-b border-gray-200 py-2 text-gray-800'>
+            <Link href={`/admin/task-details/${task.id}`} className='text-blue-600 hover:underline'>
+              {task.title}
+            </Link>
+          </li>
+        ))}
+      </ul> */}
     </div>
   );
 }
