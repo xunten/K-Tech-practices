@@ -4,8 +4,9 @@ import { Calendar, Clock, Flag, User } from 'lucide-react';
 import React from 'react';
 
 export const revalidate = 60;
-export const dynamic = 'force-static';
+export const dynamic = 'force-dynamic';
 export const dynamicParams = true;
+
 
 export async function generateStaticParams() {
   const data = await getTasks();
@@ -20,9 +21,12 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function Index({ params }: { params: { id: string } }) {
-  const id = Number(params.id);
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  // Await params trước khi sử dụng
+  const { id: paramId } = await params;
+  const id = Number(paramId);
   const task = await getTasksById(id);
+
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">

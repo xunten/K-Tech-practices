@@ -20,7 +20,7 @@ export default function Task() {
       }
     }
     fetchTasks()
-  }, [])
+  }, [token])
 
   return (
     <div>
