@@ -13,7 +13,7 @@ export default function ToDoApp() {
         <>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/" element={<LoginPage />} />
 
                     <Route element={<DefaultLayout />}>
                         <Route path="/tasks" element={<OurTaskPage />} />

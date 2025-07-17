@@ -28,7 +28,7 @@ export default function OurTaskPage() {
 
   useEffect(()=>{
     if(!loggedInUser) {
-      navigate('/login');
+      navigate('/');
     }
   }, [loggedInUser, navigate])
 

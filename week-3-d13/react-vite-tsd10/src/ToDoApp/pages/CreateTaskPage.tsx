@@ -75,8 +75,8 @@ export default function CreateTaskPage() {
   const onSubmit = async (data: TaskFormData): Promise<void> => {
     try {
       if (!access_token) {
-        toast.error('Bạn chưa đăng nhập!');
-        navigate('/login');
+        toast.error('You are not logged in!');
+        navigate('/');
         return;
       }
 

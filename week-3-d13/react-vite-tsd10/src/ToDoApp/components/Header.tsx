@@ -1,22 +1,13 @@
-import { useEffect, useState } from "react"
 import { NavLink, useNavigate } from "react-router-dom"
-import type { User } from "../types/type"
 import { useAuthStore } from "../auth/useAuthStore";
 import ButtonWithPermissions from "./ButtonWithPermissions";
 
 export default function Header() {
-    const [user, setUser] = useState<User | null>(null)
 
     const navigate = useNavigate();
     const { logOut } = useAuthStore((state) => state);
+    const loggedInUser = useAuthStore((state) => state.loggedInUser);
 
-    useEffect(() => {
-        // Load user from localStorage if available
-        const storedUser = localStorage.getItem("user")
-        if (storedUser) {
-            setUser(JSON.parse(storedUser))
-        }
-    }, [])
 
     return (
         <header className="bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 shadow-lg border-b border-blue-500/20">
@@ -26,10 +17,10 @@ export default function Header() {
                         <span className="font-bold text-2xl sm:text-3xl text-white tracking-tight">ToDoApp</span>
                     </div>
 
-                    {user && (
+                    {loggedInUser && (
                         <div className="hidden md:block">
                             <span className="text-blue-100 font-medium">
-                                Hello, <span className="text-white font-semibold">{user.email}</span>!
+                                Hello, <span className="text-white font-semibold">{loggedInUser.email}</span>!
                             </span>
                         </div>
                     )}
@@ -54,7 +45,7 @@ export default function Header() {
                         >
                             My Tasks
                         </NavLink>
-                        
+
                         <ButtonWithPermissions permissions={['Administrators']}>
                             <NavLink
                                 to="/create-task"
@@ -67,6 +58,17 @@ export default function Header() {
                             </NavLink>
                         </ButtonWithPermissions>
 
+                        {!loggedInUser && <NavLink
+                            to="/"
+                            className={({ isActive }) =>
+                                `px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${isActive ? "bg-white/20 text-white shadow-sm" : "text-blue-100 hover:text-white hover:bg-white/10"
+                                }`
+                            }
+                        >
+                            Login
+                        </NavLink>}
+
+                        {loggedInUser && (
                         <button
                             onClick={() => {
                                 logOut();
@@ -76,17 +78,10 @@ export default function Header() {
                         >
                             Logout
                         </button>
+                        )}
 
                     </nav>
                 </div>
-
-                {user && (
-                    <div className="md:hidden pb-3">
-                        <span className="text-blue-100 text-sm">
-                            Hello, <span className="text-white font-medium">{user.email}</span>!
-                        </span>
-                    </div>
-                )}
             </div>
         </header>
     )

@@ -35,7 +35,7 @@ export default function MyTasksPage() {
       // Nếu chưa login thì redirect về login
       if (!access_token || !loggedInUser) {
         toast.error('You are not logged in!');
-        navigate('/login');
+        navigate('/');
         return;
       }
 

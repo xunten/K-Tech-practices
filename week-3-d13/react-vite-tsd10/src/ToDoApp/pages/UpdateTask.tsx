@@ -69,7 +69,8 @@ export default function UpdateTaskPage() {
 
   useEffect(() => {
     if (!access_token) {
-      navigate('/login');
+      toast.error('You are not logged in!');
+      navigate('/');
       return;
     }
 

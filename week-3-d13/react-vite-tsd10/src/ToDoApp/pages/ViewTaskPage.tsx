@@ -26,7 +26,7 @@ export default function ViewTaskPage() {
 
   useEffect(() => {
     if (!access_token) {
-      navigate('/login');
+      navigate('/');
       return;
     }
     const fetchTask = async () => {
