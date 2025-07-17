@@ -8,7 +8,8 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
+    domains: ["api.escuelajs.co"],
+    unoptimized: false,
   },
 };
 
