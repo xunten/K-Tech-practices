@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
   },
   images: {
     domains: ["api.escuelajs.co"],
-    unoptimized: false,
+    unoptimized: true,
   },
 };
 
