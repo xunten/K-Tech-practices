@@ -4,7 +4,6 @@ import * as yup from "yup";
 import {  useEffect, useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-// import { toast } from "react-toastify";
 import { useAuthStore } from "../auth/useAuthStore";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";

@@ -2,24 +2,26 @@ import type { Task } from '../types/type';
 
 const baseUrl = 'https://server.aptech.io';
 
-const defaultHeaders = {
-  'Content-Type': 'application/json',
-  Accept: 'application/json',
-  Authorization: `Bearer ${localStorage.getItem('access_token') || ''}`,
-};
+// const defaultHeaders = {
+//   'Content-Type': 'application/json',
+//   Accept: 'application/json',
+//   Authorization: `Bearer ${localStorage.getItem('access_token') || ''}`,
+// };
 
-export const login = async (username: string, password: string) => {
-  const response = await fetch(`${baseUrl}/auth/login`, {
-    method: 'POST',
-    headers: defaultHeaders,
-    body: JSON.stringify({ username, password }),
-  });
-  return response.json();
-};
+// export const login = async (username: string, password: string) => {
+//   const response = await fetch(`${baseUrl}/auth/login`, {
+//     method: 'POST',
+//     headers: defaultHeaders,
+//     body: JSON.stringify({ username, password }),
+//   });
+//   return response.json();
+// };
 
-export const getTasks = async () => {
+export const getTasks = async (token: string) => {
   const response = await fetch(`${baseUrl}/workspaces/tasks`, {
-    headers: defaultHeaders,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
   return response.json();
 };

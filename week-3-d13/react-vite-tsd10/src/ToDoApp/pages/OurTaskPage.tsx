@@ -4,8 +4,9 @@ import type { Task } from "../types/type"
 import TaskFilterForm from "../components/TaskFilterForm"
 import { Calendar, Edit3, Eye, Filter, Users } from "lucide-react"
 import { useAuthStore } from "../auth/useAuthStore"
-import { apiClient } from "../lib/api-client"
+// import { apiClient } from "../lib/api-client"
 import ButtonWithPermissions from "../components/ButtonWithPermissions"
+import { getTasks } from "../services"
 
 type FilterType = {
   status: string
@@ -16,7 +17,7 @@ export default function OurTaskPage() {
   // const [user, setUser] = useState<User | null>(null)
 
   // const {access_token, refresh_token, changeAccessToken, changeRefreshToken, loggedInUser } = useAuthStore((state) => state);
-  const { loggedInUser } = useAuthStore((state) => state);
+  const { loggedInUser, access_token } = useAuthStore((state) => state);
   
   const navigate = useNavigate()
   const [tasks, setTasks] = React.useState<Task[]>([]);
@@ -27,15 +28,15 @@ export default function OurTaskPage() {
   })
 
   useEffect(()=>{
-    if(!loggedInUser) {
+    if(!access_token || !loggedInUser) {
       navigate('/');
     }
-  }, [loggedInUser, navigate])
+  }, [loggedInUser, access_token, navigate])
 
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const tasks = (await apiClient.get('/workspaces/tasks', )) as Task[];
+        const tasks = await getTasks(access_token as string)
         console.log(tasks);
         setTasks(tasks);
       } catch (error) {
@@ -43,7 +44,7 @@ export default function OurTaskPage() {
       }
     };
     fetchData();
-  }, []);
+  }, [access_token]);
 
   const handleOnEdit = (taskId: number) => {
     navigate(`/update-task/${taskId}`)
