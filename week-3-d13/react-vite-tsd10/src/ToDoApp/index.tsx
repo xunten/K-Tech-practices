@@ -14,6 +14,7 @@ export default function ToDoApp() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<LoginPage />} />
+                    <Route path="/login" element={<LoginPage />} />
 
                     <Route element={<DefaultLayout />}>
                         <Route path="/tasks" element={<OurTaskPage />} />
