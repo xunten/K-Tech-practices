@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { useAuthStore } from "../auth/useAuthStore";
@@ -81,12 +81,12 @@ export default function LoginPage() {
     });
   };
 
-  useEffect(()=>{
-      if(loggedInUser) {
-        navigate('/tasks');
-        toast.success('Signed in successfully!');
-      }
-    }, [loggedInUser, navigate])
+  useEffect(() => {
+    if (loggedInUser) {
+      navigate('/tasks');
+      toast.success('Signed in successfully!');
+    }
+  }, [loggedInUser, navigate])
 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen">

@@ -97,7 +97,7 @@ export default function CreateTaskPage() {
       console.log("Submitting data:", taskData);
 
       // ✅ Gọi API với token
-      await createTask(taskData, access_token);
+      await createTask(taskData);
 
       reset(); // reset form trước khi redirect
       toast.success('Task created successfully!');

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { getTasksByAssignee } from '../services';
 import type { Task } from '../types/type';
 import { useNavigate } from 'react-router-dom';
 import TaskFilterForm from '../components/TaskFilterForm';
@@ -7,6 +6,7 @@ import { Calendar, Edit3, Eye, Filter, Users } from "lucide-react"
 import { useAuthStore } from '../auth/useAuthStore';
 import { toast } from 'react-toastify';
 import ButtonWithPermissions from '../components/ButtonWithPermissions';
+import { apiClient } from '../lib/api-client';
 
 type FilterType = {
   status: string;
@@ -20,7 +20,6 @@ export default function MyTasksPage() {
   const navigate = useNavigate();
   // Mock data for demonstration
   const [tasks, setTasks] = React.useState<Task[]>([]);
-  // const [filters, setFilters] = React.useState<Filter>({});
 
   const access_token = useAuthStore((state) => state.access_token);
   const loggedInUser = useAuthStore((state) => state.loggedInUser);
@@ -40,7 +39,7 @@ export default function MyTasksPage() {
       }
 
       try {
-        const data = await getTasksByAssignee(assigneeId, access_token);
+        const data = (await apiClient.get(`/workspaces/tasks/assignee/${assigneeId}`)) as Task[];
         setTasks(data);
       } catch (error) {
         console.error('❌ Lỗi khi lấy danh sách task:', error);
